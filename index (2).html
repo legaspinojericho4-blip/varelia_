@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Federal Republic of Varelia | Citizen Portal</title>
+<style>
+:root{--navy:#071426;--deep:#030914;--panel:#0c1b30;--light:#122640;--accent:#e0b957;--text:#f4f7fb;--muted:#a9b4c4;--line:#1d3454}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--deep);color:var(--text);font:15px/1.6 Georgia,serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-60px;z-index:-1;background:linear-gradient(rgba(224,185,87,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(224,185,87,.05) 1px,transparent 1px),radial-gradient(70% 45% at 50% 0,#12315a,transparent);background-size:48px 48px,48px 48px,100% 100%;animation:g 40s linear infinite}
+@keyframes g{to{transform:translate(48px,48px)}}
+@media(prefers-reduced-motion:reduce){body::before{animation:none}}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button,input,select,textarea,th,td,label,.badge{font-family:system-ui,Arial,sans-serif}
+header{position:sticky;top:0;z-index:30;background:rgba(3,9,20,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 5%}
+.brand{display:flex;gap:11px;align-items:center;cursor:pointer}
+.seal{width:40px;height:40px;border:2px solid var(--accent);border-radius:50%;display:grid;place-items:center;font:700 12px system-ui;color:var(--accent)}
+.brand b{letter-spacing:3px;font-size:16px;display:block}
+.brand small{font:10px system-ui;color:var(--muted);letter-spacing:1px}
+#burger{display:none;width:46px;height:46px;background:var(--panel);border:1px solid var(--line);border-radius:8px;font-size:22px}
+nav{padding:0 5% 10px}
+nav div{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+nav button{padding:9px 13px;background:transparent;border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:12px;letter-spacing:.5px}
+nav button.on{background:var(--accent);color:var(--deep);border-color:var(--accent);font-weight:700}
+@media(max-width:820px){#burger{display:block}nav{display:none}nav.open{display:block}nav button{flex:1 1 45%;min-height:44px}}
+.pg{display:none;max-width:1000px;margin:auto;padding:34px 5% 50px}.pg.on{display:block}
+h2{font-weight:400;font-size:28px;margin-bottom:6px}h3{font-weight:400;font-size:21px;margin:30px 0 12px}
+.mu{color:var(--muted)}.lead{font:14px/1.6 system-ui;color:var(--muted);margin-bottom:18px}
+.hero{text-align:center;padding:40px 0 20px}
+.hero svg{width:92px;height:92px;margin-bottom:14px;filter:drop-shadow(0 0 16px rgba(224,185,87,.4))}
+.hero h1{font-weight:400;font-size:clamp(30px,8vw,58px);letter-spacing:3px;line-height:1.15}
+.hero .mo{color:var(--accent);font-style:italic;font-size:20px;margin:14px 0}
+.hero p.d{max-width:600px;margin:0 auto 24px;color:var(--muted)}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:14px 22px;min-height:46px;border-radius:7px;border:1px solid var(--line);background:var(--panel);font-size:14px;letter-spacing:.5px}
+.btn.p{background:var(--accent);color:var(--deep);border-color:var(--accent);font-weight:700}
+.btn:active{transform:scale(.97)}
+.glass{background:rgba(12,27,48,.78);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:34px}
+.stats .glass{text-align:center;padding:16px}.stats b{display:block;font-size:20px;color:var(--accent);font-weight:400}.stats span{font:12px system-ui;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}
+.tw{overflow-x:auto}.tw table{min-width:520px}
+tr.k{cursor:pointer}tr.k:hover,tr.k.on{background:var(--light)}
+details{background:rgba(12,27,48,.78);border:1px solid var(--line);border-radius:10px;margin-bottom:9px}
+summary{padding:14px 16px;cursor:pointer;min-height:46px}details[open] summary{color:var(--accent)}
+details p{padding:0 16px 16px;color:var(--muted);white-space:pre-line}
+.g7{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px}.g7 details{margin:0}
+.tl{border-left:2px solid var(--accent);margin-left:8px;padding-left:16px}.tl details{margin-bottom:12px}
+.f{margin-bottom:15px}.f label{display:block;font-size:13px;color:#b9c8dc;margin-bottom:6px}
+.f input,.f select,.f textarea{width:100%;padding:13px;background:var(--navy);border:1px solid var(--line);border-radius:7px}
+.f textarea{min-height:110px;resize:vertical}.bad{border-color:#e06c6c!important}
+.er{display:none;margin-bottom:14px;padding:11px;border-radius:7px;background:rgba(224,108,108,.12);border:1px solid #e06c6c;color:#ffb0b0;font:13px system-ui}
+.ok{display:none;margin-bottom:14px;padding:11px;border-radius:7px;background:rgba(224,185,87,.12);border:1px solid var(--accent);color:var(--accent);font:13px system-ui}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}@media(max-width:600px){.row{grid-template-columns:1fr}}
+.dots{display:flex;gap:6px;margin-bottom:18px}.dots i{flex:1;height:4px;background:var(--line);border-radius:2px}.dots i.on{background:var(--accent)}
+.f.ck{display:flex;gap:10px;align-items:flex-start}.f.ck input{width:auto;padding:0;margin-top:4px}.f.ck label{margin:0}
+.st{display:inline-block;padding:3px 10px;border-radius:20px;font:600 11px system-ui;border:1px solid var(--line)}
+.st.Pending{color:#9cc3ff;border-color:#9cc3ff}.st.Approved{color:#7ee0a1;border-color:#7ee0a1}.st.Onhold{color:var(--accent);border-color:var(--accent)}.st.Rejected{color:#ff9c9c;border-color:#e06c6c}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}.chips button{padding:8px 13px;border-radius:20px;background:transparent;border:1px solid var(--line);color:var(--muted);font-size:12px}.chips button.on{background:var(--accent);color:var(--deep);border-color:var(--accent);font-weight:700}
+.acts{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 14px}.acts .btn{padding:10px 16px;min-height:42px}.acts .btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.g{border-color:#7ee0a1;color:#7ee0a1}.btn.w{border-color:var(--accent);color:var(--accent)}.btn.r{border-color:#e06c6c;color:#ff9c9c}
+.kv{padding:0 16px 12px;font:13px/1.7 system-ui;color:var(--muted)}.kv b{color:var(--text);font-weight:600}
+.lg{padding:0 16px 14px;font:12px/1.6 system-ui;color:var(--muted)}
+td input[type=checkbox]{width:20px;height:20px}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;background:var(--light);color:var(--accent);border:1px solid var(--line)}
+.sw{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.sw span{padding:10px 14px;border-radius:6px;font:600 12px system-ui;border:1px solid var(--line)}
+.anthem{text-align:center;font-size:17px;line-height:1.9}.anthem p{margin-bottom:18px}
+.creed{text-align:center;font-size:24px;line-height:1.4;margin-top:34px}.creed em{display:block;color:var(--accent);margin-top:10px;font-style:normal}
+footer{text-align:center;padding:22px 5%;border-top:1px solid var(--line);font:12px system-ui;color:var(--muted)}
+header{padding-top:env(safe-area-inset-top,0px)}footer{padding-bottom:calc(22px + env(safe-area-inset-bottom,0px))}
+</style>
+</head>
+<body>
+
+<header>
+<div class="bar">
+<div class="brand" onclick="go('home')"><div class="seal">VR</div><div><b>VARELIA</b><small>CITIZEN PORTAL</small></div></div>
+<button id="burger" aria-label="Menu" aria-expanded="false">&#9776;</button>
+</div>
+<nav id="nav"><div id="links"></div></nav>
+</header>
+
+<main>
+<section class="pg" id="home">
+<div class="hero">
+<svg id="star" viewBox="0 0 200 200" role="img" aria-label="Seven-pointed gold star"></svg>
+<h1>FEDERAL REPUBLIC<br>OF VARELIA</h1>
+<p class="mo">Seven Beginnings. One Nation.</p>
+<p class="d">The official portal of the Varelian government. Learn about the republic, find its institutions, and contact your government.</p>
+<div class="btns"><button class="btn p" onclick="go('citizenship')">Apply for citizenship</button><button class="btn" onclick="go('beginnings')">Explore Varelia</button><button class="btn" onclick="go('contact')">Contact the government</button></div>
+</div>
+<div class="stats">
+<div class="glass"><b>Valeris</b><span>Capital</span></div>
+<div class="glass"><b>VCR</b><span>Varelian Crown</span></div>
+<div class="glass"><b>1890</b><span>Federal Republic</span></div>
+<div class="glass"><b>7</b><span>Federal regions</span></div>
+</div>
+</section>
+
+<section class="pg" id="beginnings">
+<h2>The Seven Beginnings</h2>
+<p class="lead">Seven principles that founded the nation and still guide it. Tap one to read more.</p>
+<div class="g7" id="b7"></div>
+</section>
+
+<section class="pg" id="history">
+<h2>History</h2>
+<p class="lead">From Sevenistan to a federal republic.</p>
+<div class="tl" id="tl"></div>
+</section>
+
+<section class="pg" id="government">
+<h2>Government</h2>
+<p class="lead">A federal republic. The Constitution is the supreme law.</p>
+<details open><summary>Executive Branch</summary><p>President Neil Araña is head of state and head of government.
+Vice President Ghiriel Ballon assists the President and assumes presidential duties when the Constitution requires.</p></details>
+<details><summary>Legislative Branch: Federal Congress</summary><p>Council of States: represents the federal regions.
+National Assembly: represents the people.
+Congress makes federal laws, approves budgets, oversees the executive, and ratifies major national decisions.</p></details>
+<details><summary>Judicial Branch</summary><p>Constitutional Court: interprets the Constitution.
+Federal Supreme Court: the highest ordinary court.
+Federal, Regional, and Local Courts: handle national, regional, and municipal cases.</p></details>
+<details><summary>The Constitution</summary><p>We, the people of Varelia, united by the Seven Beginnings, establish this Constitution to preserve freedom, uphold justice, advance knowledge, strengthen our nation, protect our people, and secure a lasting legacy for generations to come.
+
+I The Nation · II Rights of the People · III The Executive · IV The Legislature · V The Judiciary · VI Regions and Local Government · VII Constitutional Legacy</p></details>
+<h3>Political parties</h3>
+<div class="glass tw"><table>
+<tr><th>Party</th><th>Focus</th></tr>
+<tr><td>Varelian Unity Party (VUP)</td><td>National unity and strong federal institutions</td></tr>
+<tr><td>Federal Reform Party (FRP)</td><td>Modernization and regional authority</td></tr>
+<tr><td>People's Justice Party (PJP)</td><td>Equality, justice, and public welfare</td></tr>
+<tr><td>National Progress Alliance (NPA)</td><td>Technology, education, infrastructure, economy</td></tr>
+</table></div>
+</section>
+
+<section class="pg" id="regions">
+<h2>The seven regions</h2>
+<p class="lead">Each region has a governor, a council, and municipal governments. Tap a region to see its profile.</p>
+<div class="glass tw"><table id="rt"><tr><th>Region</th><th>Known for</th></tr></table></div>
+<div class="glass" id="rd" style="margin-top:14px"><span class="mu">Select a region above.</span></div>
+</section>
+
+<section class="pg" id="people">
+<h2>Leadership and personnel</h2>
+<p class="lead">Official personnel codes use the format VRL followed by 9 digits.</p>
+<div class="glass tw"><table id="pt"><tr><th>Name</th><th>Position</th></tr></table></div>
+<h3>Verify a personnel code</h3>
+<div class="glass">
+<div class="f"><label for="pc">Personnel code</label><input id="pc" placeholder="VRL-184700001" autocomplete="off"></div>
+<div class="er" id="pe" role="alert"></div><div class="ok" id="po" role="status"></div>
+<button class="btn p" id="pb">Verify code</button>
+</div>
+</section>
+
+<section class="pg" id="symbols">
+<h2>National symbols</h2>
+<p class="lead">A deep navy flag with a gold seven-pointed star for the Seven Beginnings. The emblem combines the star, a national shield, laurel branches, and a crown-inspired center.</p>
+<div class="sw">
+<span style="background:#0a1630">Deep Navy: stability and unity</span>
+<span style="background:#d4a937;color:#0a1630">Gold: hope and prosperity</span>
+<span style="background:#f6f7fb;color:#0a1630">White: peace and law</span>
+<span style="background:#aab3c5;color:#0a1630">Silver: progress</span>
+</div>
+<h3>Varelia — Seven Beginnings</h3>
+<div class="glass anthem">
+<p>From seven beginnings, we rise as one,<br>Beneath our flag, beneath the sun.<br>Through every storm, through every fight,<br>We stand together, proud and bright.</p>
+<p>Varelia, Varelia, hear our call,<br>One united nation, standing tall.<br>From our hearts, our voices sing,<br>Honor to our land, our crown, our king.</p>
+<p>Our rivers flow, our mountains stand,<br>Hope and courage fill our land.<br>Side by side, we'll face tomorrow,<br>Leaving behind the fear and sorrow.</p>
+<p>Varelia, Varelia, strong and free,<br>Seven beginnings, one destiny.<br>Let our banner reach the sky,<br>Varelia lives, Varelia shall rise.</p>
+</div>
+<div class="creed">Seven Beginnings.<br>One People.<br>One Republic.<br>One Nation.<em>Varelia shall rise.</em></div>
+</section>
+
+<section class="pg" id="citizenship">
+<h2>Apply for citizenship</h2>
+<p class="lead">Three short steps. Varelian officials review every application. When you submit, you get a reference number to check your status.</p>
+<div class="glass">
+<div class="dots" id="dots"><i></i><i></i><i></i></div>
+<div class="er" id="ce" role="alert"></div>
+<div id="s1">
+<div class="row"><div class="f"><label for="an">Full legal name</label><input id="an" autocomplete="name"></div>
+<div class="f"><label for="ad">Date of birth</label><input id="ad" type="date"></div></div>
+<div class="row"><div class="f"><label for="ap">Place of birth</label><input id="ap"></div>
+<div class="f"><label for="am">Email</label><input id="am" type="email" autocomplete="email"></div></div>
+</div>
+<div id="s2" hidden>
+<div class="f"><label for="ar">Region where you will live</label><select id="ar"></select></div>
+<div class="f"><label for="aw">Why do you want to become a citizen of Varelia?</label><textarea id="aw"></textarea></div>
+<div class="f ck"><input type="checkbox" id="ak"><label for="ak">I pledge to respect the Constitution and the Seven Beginnings.</label></div>
+</div>
+<div id="s3" hidden><div class="tw"><table id="rv"></table></div></div>
+<div class="ok" id="co" role="status"></div>
+<div class="btns" style="justify-content:flex-start;margin-top:6px"><button class="btn" id="cb" hidden>Back</button><button class="btn p" id="cn">Continue</button></div>
+</div>
+</section>
+
+<section class="pg" id="status">
+<h2>Check application status</h2>
+<p class="lead">Enter the reference number you received when you applied, and the email you used.</p>
+<div class="glass">
+<div class="row"><div class="f"><label for="sr">Reference number</label><input id="sr" placeholder="APP-123456" autocomplete="off"></div>
+<div class="f"><label for="se">Email</label><input id="se" type="email"></div></div>
+<div class="er" id="sx" role="alert"></div>
+<button class="btn p" id="sb">Check status</button>
+<div id="so" style="margin-top:16px"></div>
+</div>
+</section>
+
+<section class="pg" id="admin">
+<h2>Administration</h2>
+<p class="lead" id="al">Enter your permission code to review citizenship applications.</p>
+<div class="glass" id="lock">
+<div class="f"><label for="ac">Permission code</label><input id="ac" type="password" placeholder="VR-00000" autocomplete="off"></div>
+<div class="er" id="ae" role="alert"></div>
+<button class="btn p" id="au">Unlock</button>
+</div>
+<div id="desk" hidden>
+<div class="glass" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><b id="who"></b><div class="mu" id="role" style="font:13px system-ui"></div></div><button class="btn" id="ao">Sign out</button></div>
+<h3>Applications</h3>
+<div class="chips" id="ch"></div>
+<div id="al2"></div>
+<div id="pw" hidden>
+<h3>Personnel powers</h3>
+<p class="lead">Only the Founder / General can see this. Tick the powers each person may use.</p>
+<div class="glass tw"><table id="pwt"></table></div>
+</div>
+</div>
+</section>
+
+<section class="pg" id="contact">
+<h2>Contact the government</h2>
+<p class="lead">Write to the government by email. In an emergency, use the National Emergency Authority code 911-VR.</p>
+<div class="glass"><p>Federal Citizen Services Office<br>Office of the President</p><p style="margin-top:12px"><a href="mailto:legaspinojericho4@gmail.com" style="color:var(--accent)">legaspinojericho4@gmail.com</a></p></div>
+<p class="lead" style="margin-top:16px">Email: legaspinojericho4@gmail.com</p>
+</section>
+</main>
+
+<footer>&copy; The Federal Republic of Varelia · Seven Beginnings. One Nation.</footer>
+
+<script>
+var $=function(s){return document.querySelector(s)},MAIL="legaspinojericho4@gmail.com";
+var PAGES=[["home","Home"],["beginnings","Seven Beginnings"],["history","History"],["government","Government"],["regions","Regions"],["people","People"],["symbols","Symbols"],["citizenship","Citizenship"],["status","Check status"],["admin","Administration"],["contact","Contact"]];
+var B=[["Aurelia","Hope","A better future can always be built, even after hardship."],["Valen","Unity","The people of Varelia must stand together as one nation."],["Eryndor","Knowledge","The pursuit of education, discovery, science, and wisdom."],["Caelora","Freedom","The right of every citizen to live freely and pursue their future under the protection of the law."],["Dravena","Strength","The courage, resilience, and determination needed to protect and build the nation."],["Solvara","Justice","The law must apply fairly, and government power must remain accountable."],["Vareon","Legacy","The responsibility to preserve what previous generations built and leave a stronger nation for those who come next."]];
+var H=[["1847","The Founding Era","The historical foundation of modern Varelia begins. The land is known as Sevenistan, with an identity built on seven foundational principles."],["1850s–1870s","Sevenistan development","Sevenistan develops its political institutions and regional communities."],["1880s","The Federal Movement","Political leaders advocate for a federal system that unites the territories while preserving regional authority."],["1887","The birth of Varelia","Sevenistan officially adopts the name Varelia."],["1890","The Federal Republic","The Federal Republic of Varelia is formally established, with Valeris as the national capital."]];
+var R=[["Valeris","The political heart of Varelia and home to the national capital."],["Aurelia","A major agricultural and educational region associated with hope and development."],["Valen","A commercial and transportation center representing unity and cooperation."],["Eryndor","Varelia's center for education, science, research, and technology."],["Caelora","A culturally diverse region known for coastal communities and civic traditions."],["Dravena","A mountainous and industrial region associated with infrastructure, engineering, and national strength."],["Solvara","A major historical and legal center associated with justice and national heritage."]];
+var P=[["Jericho Legaspino","Founder","VRL-184700001"],["Neil Araña","President","VRL-184700002"],["Ghiriel Ballon","Vice President","VRL-184700003"],["Muhammad","Main Lead Escort / 2nd in Command","VRL-184700004"],["Castiel Saure","Sergeant Major","VRL-184700005"],["Princ Buhat","Sergeant","VRL-184700006"]];
+
+function go(id){
+ document.querySelectorAll(".pg").forEach(function(p){p.classList.toggle("on",p.id===id)});
+ document.querySelectorAll("#links button").forEach(function(b){b.classList.toggle("on",b.dataset.p===id)});
+ if(id!=="admin")signOut();$("#nav").classList.remove("open");$("#burger").setAttribute("aria-expanded","false");
+ window.scrollTo(0,0);try{if(location.hash!=="#"+id)history.replaceState(null,"","#"+id)}catch(err){}
+}
+$("#links").innerHTML=PAGES.map(function(p){return '<button data-p="'+p[0]+'">'+p[1]+'</button>'}).join("");
+$("#links").onclick=function(e){if(e.target.dataset.p)go(e.target.dataset.p)};
+$("#burger").onclick=function(){var o=$("#nav").classList.toggle("open");this.setAttribute("aria-expanded",o)};
+
+$("#b7").innerHTML=B.map(function(b){return '<details><summary>'+b[0]+' <span class="badge">'+b[1]+'</span></summary><p>'+b[2]+'</p></details>'}).join("");
+$("#tl").innerHTML=H.map(function(h){return '<details><summary>'+h[0]+' · '+h[1]+'</summary><p>'+h[2]+'</p></details>'}).join("");
+$("#pt").innerHTML+=P.map(function(p){return '<tr><td>'+p[0]+'</td><td>'+p[1]+'</td></tr>'}).join("");
+$("#rt").innerHTML+=R.map(function(r,i){return '<tr class="k" data-i="'+i+'" tabindex="0"><td>'+r[0]+' Region</td><td>'+r[1]+'</td></tr>'}).join("");
+function pick(tr){if(!tr)return;document.querySelectorAll("#rt tr.k").forEach(function(x){x.classList.remove("on")});tr.classList.add("on");var r=R[tr.dataset.i];$("#rd").innerHTML="<h3 style='margin:0 0 6px'>"+r[0]+" Region</h3><p class='mu'>"+r[1]+"</p>"}
+$("#rt").onclick=function(e){pick(e.target.closest("tr.k"))};
+$("#rt").onkeydown=function(e){if(e.key==="Enter")pick(e.target.closest("tr.k"))};
+
+$("#pb").onclick=function(){
+ var v=$("#pc").value.trim().toUpperCase(),er=$("#pe"),ok=$("#po"),p=P.filter(function(x){return x[2]===v})[0];
+ er.style.display=ok.style.display="none";$("#pc").classList.toggle("bad",!p);
+ if(p){ok.textContent=p[2]+" is assigned to "+p[0]+", "+p[1]+".";ok.style.display="block"}
+ else{er.textContent=/^VRL-\d{9}$/.test(v)?"No record matches this code.":"Enter a code in the format VRL-123456789.";er.style.display="block"}
+};
+
+var cs=1;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+$("#ar").innerHTML=R.map(function(r){return "<option>"+r[0]+" Region</option>"}).join("");
+function cshow(){
+ [1,2,3].forEach(function(i){$("#s"+i).hidden=i!==cs});
+ document.querySelectorAll("#dots i").forEach(function(d,i){d.classList.toggle("on",i<cs)});
+ $("#cb").hidden=cs===1;$("#cn").textContent=cs===3?"Submit application":"Continue";
+ $("#ce").style.display="none";
+}
+function cerr(){
+ var d=$("#ad").value;
+ if(cs===1){
+  if(!$("#an").value.trim()||!$("#ap").value.trim())return "Enter your full legal name and place of birth.";
+  if(!d||new Date(d)>=new Date())return "Enter a valid date of birth in the past.";
+  if(!/^\S+@\S+\.\S+$/.test($("#am").value))return "Enter a valid email address.";
+ }
+ if(cs===2){
+  if($("#aw").value.trim().length<20)return "Write at least a couple of sentences about why you are applying.";
+  if(!$("#ak").checked)return "You must accept the pledge to continue.";
+ }
+ return "";
+}
+$("#cb").onclick=function(){cs--;cshow()};
+$("#cn").onclick=function(){
+ var e=cerr();
+ if(e){$("#ce").textContent=e;$("#ce").style.display="block";return}
+ if(cs<3){
+  cs++;cshow();
+  if(cs===3)$("#rv").innerHTML=[["Name",$("#an").value],["Date of birth",$("#ad").value],["Place of birth",$("#ap").value],["Email",$("#am").value],["Region",$("#ar").value],["Reason",$("#aw").value]].map(function(r){return "<tr><th>"+r[0]+"</th><td>"+esc(r[1])+"</td></tr>"}).join("");
+  return;
+ }
+ var ref;do{ref="APP-"+Math.floor(100000+Math.random()*900000)}while(APPS.some(function(x){return x.ref===ref}));
+ APPS.push({ref:ref,name:$("#an").value.trim(),dob:$("#ad").value,place:$("#ap").value.trim(),email:$("#am").value.trim().toLowerCase(),region:$("#ar").value,reason:$("#aw").value.trim(),status:"Pending",log:[],at:Date.now()});
+ sv("vr_apps",APPS);
+ $("#cn").hidden=true;$("#cb").hidden=true;
+ $("#co").textContent="Application "+ref+" submitted. Save this number. You need it with your email on the Check status page.";$("#co").style.display="block";
+};
+cshow();
+
+var mem={};
+function ld(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):(mem[k]!==undefined?mem[k]:d)}catch(e){return mem[k]!==undefined?mem[k]:d}}
+function sv(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var APPS=ld("vr_apps",[]);
+var PEOPLE=[{c:"VR-12345",n:"Jericho Legaspino",r:"Founder / General",all:1,p:{a:1,w:1,x:1}},{c:"VR-23456",n:"Neil Araña",r:"President",p:{a:1,w:1,x:1}},{c:"VR-34567",n:"Ghiriel Ballon",r:"Vice President",p:{a:1,w:1,x:0}},{c:"VR-45678",n:"Muhammad",r:"Main Lead Escort / 2nd in Command",p:{a:0,w:1,x:0}},{c:"VR-56789",n:"Castiel Saure",r:"Sergeant Major",p:{a:0,w:1,x:0}}];
+var PW=ld("vr_powers",{});PEOPLE.forEach(function(p){if(!p.all&&PW[p.c])p.p=PW[p.c]});
+var me=null,flt="All",lastOpen=null,PK=[["a","Approve"],["w","Put on hold"],["x","Reject"]],ST={a:"Approved",w:"On hold",x:"Rejected"},CL={a:"g",w:"w",x:"r"};
+function SC(t){return t.replace(" ","")}
+function when(t){return new Date(t).toLocaleString()}
+function signOut(){me=null;$("#desk").hidden=true;$("#lock").hidden=false;$("#ac").value="";$("#ae").style.display="none";$("#al").textContent="Enter your permission code to review citizenship applications."}
+$("#au").onclick=function(){
+ var c=$("#ac").value.trim().toUpperCase();me=PEOPLE.filter(function(p){return p.c===c})[0]||null;
+ if(!me){$("#ae").textContent="That code is not active.";$("#ae").style.display="block";return}
+ $("#lock").hidden=true;$("#desk").hidden=false;$("#ae").style.display="none";
+ $("#who").textContent=me.n;$("#role").textContent=me.r;$("#al").textContent="Review applications and update their status.";
+ flt="All";ren();
+};
+$("#ac").onkeydown=function(e){if(e.key==="Enter")$("#au").click()};
+$("#ao").onclick=signOut;
+function ren(){
+ APPS=ld("vr_apps",[]);
+ var fl=["All","Pending","On hold","Approved","Rejected"];
+ $("#ch").innerHTML=fl.map(function(f){var n=f==="All"?APPS.length:APPS.filter(function(a){return a.status===f}).length;return '<button data-f="'+f+'" class="'+(f===flt?"on":"")+'">'+f+' ('+n+')</button>'}).join("");
+ var L=APPS.filter(function(a){return flt==="All"||a.status===flt}).sort(function(a,b){return b.at-a.at});
+ $("#al2").innerHTML=L.length?L.map(function(a){
+  var acts=PK.map(function(k){return '<button class="btn '+CL[k[0]]+'" data-r="'+a.ref+'" data-k="'+k[0]+'"'+(me.p[k[0]]?"":" disabled")+'>'+k[1]+'</button>'}).join("");
+  var lg=a.log.length?a.log.map(function(l){return esc(l.by)+" set "+l.to+" · "+when(l.t)}).join("<br>"):"No actions yet.";
+  return '<details'+(a.ref===lastOpen?" open":"")+'><summary>'+esc(a.name)+' · '+a.ref+' <span class="st '+SC(a.status)+'">'+a.status+'</span></summary><div class="kv"><b>Submitted:</b> '+when(a.at)+'<br><b>Born:</b> '+esc(a.dob)+' in '+esc(a.place)+'<br><b>Email:</b> '+esc(a.email)+'<br><b>Region:</b> '+esc(a.region)+'<br><b>Reason:</b> '+esc(a.reason)+'</div><div class="acts">'+acts+'</div><div class="lg">'+lg+'</div></details>'}).join(""):'<div class="glass mu">No applications here yet.</div>';
+ $("#pw").hidden=!me.all;
+ if(me.all)$("#pwt").innerHTML='<tr><th>Person</th><th>Code</th><th>Approve</th><th>Hold</th><th>Reject</th></tr>'+PEOPLE.map(function(p,i){return '<tr><td>'+esc(p.n)+'<br><span class="mu">'+esc(p.r)+'</span></td><td>'+p.c+'</td>'+PK.map(function(k){return '<td><input type="checkbox" data-i="'+i+'" data-k="'+k[0]+'"'+(p.p[k[0]]?" checked":"")+(p.all?" disabled":"")+' aria-label="'+esc(p.n)+' '+k[1]+'"></td>'}).join("")+'</tr>'}).join("");
+}
+$("#ch").onclick=function(e){var f=e.target.dataset.f;if(f){flt=f;ren()}};
+$("#al2").onclick=function(e){
+ var b=e.target.closest("button[data-k]");if(!b||b.disabled||!me||!me.p[b.dataset.k])return;
+ var a=APPS.filter(function(x){return x.ref===b.dataset.r})[0];if(!a)return;
+ a.status=ST[b.dataset.k];a.log.push({by:me.n+" ("+me.r+")",to:a.status,t:Date.now()});
+ sv("vr_apps",APPS);lastOpen=a.ref;ren();
+};
+$("#pwt").onchange=function(e){
+ var t=e.target,p=PEOPLE[t.dataset.i];if(!me||!me.all||!p||p.all)return;
+ p.p[t.dataset.k]=t.checked?1:0;PW[p.c]=p.p;sv("vr_powers",PW);
+};
+$("#sb").onclick=function(){
+ var r=$("#sr").value.trim().toUpperCase(),m=$("#se").value.trim().toLowerCase(),x=$("#sx"),o=$("#so");
+ APPS=ld("vr_apps",[]);var a=APPS.filter(function(z){return z.ref===r&&z.email===m})[0];
+ o.innerHTML="";x.style.display="none";
+ if(!a){x.textContent="No application matches that reference number and email.";x.style.display="block";return}
+ var msg={"Pending":"Your application has been received and is waiting for review.","On hold":"Officials need more time before they decide. Check again later.","Approved":"Your application was approved. Welcome to Varelia.","Rejected":"Your application was not approved."}[a.status];
+ var last=a.log.length?a.log[a.log.length-1].t:a.at;
+ o.innerHTML='<div class="glass"><span class="st '+SC(a.status)+'">'+a.status+'</span><h3 style="margin:10px 0 6px">'+esc(a.name)+'</h3><p class="mu">'+msg+'</p><p class="mu" style="font:12px system-ui;margin-top:8px">Submitted '+when(a.at)+' · Last updated '+when(last)+'</p></div>';
+};
+
+(function(){var p=[],i,a,d;for(i=0;i<14;i++){a=-Math.PI/2+i*Math.PI/7;d=i%2?44:88;p.push((100+d*Math.cos(a)).toFixed(1)+","+(102+d*Math.sin(a)).toFixed(1))}
+$("#star").innerHTML='<polygon points="'+p.join(" ")+'" fill="#e0b957" stroke="#f4f7fb" stroke-width="2" stroke-linejoin="round"/><circle cx="100" cy="102" r="14" fill="#071426" stroke="#a9b4c4" stroke-width="2"/>'})();
+
+go(PAGES.some(function(p){return "#"+p[0]===location.hash})?location.hash.slice(1):"home");
+</script>
+<style>
+.czi{flex:1;min-width:0;padding:13px;background:var(--navy);border:1px solid var(--line);border-radius:7px}
+.czlog{height:340px;overflow-y:auto;padding:12px}
+.czm{margin-bottom:10px;font:14px/1.5 system-ui}.czm b{color:var(--accent)}.czm.me b{color:#7ee0a1}
+.czm span{font-size:11px;color:var(--muted)}.czm div{word-break:break-word}
+.czgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.czc{aspect-ratio:1;border-radius:8px;border:1px solid var(--line);background:var(--light);font-size:26px;color:var(--accent)}
+.czc.up{background:var(--panel)}.czc.ok{border-color:#7ee0a1}
+.czar{position:relative;height:260px;border:1px solid var(--line);border-radius:10px;background:var(--navy);overflow:hidden}
+.czs{position:absolute;width:44px;height:44px;border-radius:50%;border:0;background:var(--accent);color:var(--deep);font-size:22px}
+.czo{display:block;width:100%;margin-bottom:8px;text-align:left}
+.czo.qg{border-color:#7ee0a1;color:#7ee0a1}.czo.qb{border-color:#e06c6c;color:#ff9c9c}
+</style>
+
+<section class="pg" id="citizens">
+<h2>Citizen lounge</h2>
+<p class="lead" id="zl">Approved citizens enter with their reference number and email. You are taken here automatically when you check your status and it says Approved.</p>
+<div class="glass" id="zlock">
+<div class="row"><div class="f"><label for="zr">Reference number</label><input id="zr" placeholder="APP-123456" autocomplete="off"></div>
+<div class="f"><label for="ze">Email</label><input id="ze" type="email"></div></div>
+<div class="er" id="zx" role="alert"></div>
+<button class="btn p" id="zgo">Enter lounge</button>
+</div>
+<div id="zdesk" hidden>
+<div class="glass" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><b id="zw" style="font-weight:400;font-size:20px"></b><div class="mu" id="zrg" style="font:13px system-ui"></div></div><button class="btn" id="zout">Sign out</button></div>
+<div class="chips" id="zt" style="margin-top:14px"><button data-t="chat" class="on">Chat</button><button data-t="games">Games</button><button data-t="quiz">Quiz</button><button data-t="fb">Message leaders</button></div>
+
+<div id="tchat">
+<div class="glass czlog" id="zlog"></div>
+<div style="display:flex;gap:8px;margin-top:10px"><input id="zin" class="czi" maxlength="300" placeholder="Write a message to all citizens" autocomplete="off"><button class="btn p" id="zsend">Send</button></div>
+</div>
+
+<div id="tgames" hidden>
+<div class="chips" id="zg"><button data-g="pair" class="on">Find the pair</button><button data-g="num">Guess the number</button><button data-g="tap">Quick tap</button></div>
+<div class="glass" id="zgame"></div>
+</div>
+
+<div id="tquiz" hidden>
+<p class="lead">Test what you know about Varelia. Eight questions.</p>
+<div class="glass" id="zquiz"></div>
+</div>
+
+<div id="tfb" hidden>
+<p class="lead">Your private feedback goes to the Founder and the President. Only they can read it and reply.</p>
+<div class="glass czlog" id="zfl"></div>
+<div style="display:flex;gap:8px;margin-top:10px"><input id="zfi" class="czi" maxlength="500" placeholder="Write your feedback" autocomplete="off"><button class="btn p" id="zfs">Send</button></div>
+</div>
+</div>
+</section>
+
+<script>
+(function(){
+var cu=null,poll=null,gt=null,LD=["VR-12345","VR-23456"],openFb=null;
+var nb=document.createElement("button");nb.dataset.p="citizens";nb.textContent="Citizens";$("#links").appendChild(nb);
+
+/* admin panel for the Founder and President */
+var fp=document.createElement("div");fp.id="fbp";fp.hidden=true;
+fp.innerHTML='<h3>Citizen feedback</h3><p class="lead">Private messages from citizens. Only the Founder and the President see this. Your replies appear in the citizen\'s own feedback chat.</p><button class="btn" id="fbr" style="margin-bottom:12px">Refresh</button><div id="fbl"></div>';
+$("#desk").appendChild(fp);
+
+var og=go;go=function(id){if(id!=="citizens")out();if(id!=="admin")fp.hidden=true;og(id)};
+
+function out(){
+ cu=null;clearInterval(poll);clearInterval(gt);
+ $("#zdesk").hidden=true;$("#zlock").hidden=false;$("#zr").value=$("#ze").value="";$("#zx").style.display="none";
+}
+function enter(a){
+ clearInterval(poll);cu=a;$("#zlock").hidden=true;$("#zdesk").hidden=false;
+ $("#zw").textContent="Welcome, "+a.name;$("#zrg").textContent="Citizen of "+a.region;
+ tab("chat");poll=setInterval(function(){rc(false);rf(false)},2500);
+}
+$("#zgo").onclick=function(){
+ var r=$("#zr").value.trim().toUpperCase(),m=$("#ze").value.trim().toLowerCase(),x=$("#zx");
+ var a=ld("vr_apps",[]).filter(function(z){return z.ref===r&&z.email===m})[0];
+ x.style.display="none";
+ if(!a){x.textContent="No application matches that reference number and email.";x.style.display="block";return}
+ if(a.status!=="Approved"){x.textContent="Your application is "+a.status+". Only approved citizens can enter the lounge.";x.style.display="block";return}
+ enter(a);
+};
+$("#zout").onclick=out;
+
+/* approved on the status page: go straight to the lounge */
+$("#sb").addEventListener("click",function(){
+ var r=$("#sr").value.trim().toUpperCase(),m=$("#se").value.trim().toLowerCase();
+ var a=ld("vr_apps",[]).filter(function(z){return z.ref===r&&z.email===m})[0];
+ if(a&&a.status==="Approved"){
+  $("#so").insertAdjacentHTML("beforeend",'<p class="mu" style="margin-top:10px">Approved. Opening the citizen lounge...</p>');
+  setTimeout(function(){enter(a);go("citizens")},1500);
+ }
+});
+
+var TABS=["chat","games","quiz","fb"];
+function tab(t){
+ TABS.forEach(function(n){$("#t"+n).hidden=n!==t});
+ document.querySelectorAll("#zt button").forEach(function(b){b.classList.toggle("on",b.dataset.t===t)});
+ clearInterval(gt);
+ if(t==="games")sg("pair");else if(t==="quiz")quiz($("#zquiz"));else if(t==="fb")rf(true);else rc(true);
+}
+$("#zt").onclick=function(e){if(e.target.dataset.t)tab(e.target.dataset.t)};
+
+/* public chat */
+function box(el,end,near){if(end||near)el.scrollTop=el.scrollHeight}
+function rc(end){
+ if(!cu)return;
+ var L=ld("vr_chat",[]),b=$("#zlog"),near=b.scrollHeight-b.scrollTop-b.clientHeight<40;
+ b.innerHTML=L.length?L.map(function(m){return '<div class="czm'+(m.ref===cu.ref?" me":"")+'"><b>'+esc(m.n)+'</b> <span>'+esc(m.rg)+' · '+new Date(m.t).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})+'</span><div>'+esc(m.x)+'</div></div>'}).join(""):'<span class="mu">No messages yet. Say hello.</span>';
+ box(b,end,near);
+}
+function sendMsg(){
+ var x=$("#zin").value.trim();if(!x||!cu)return;
+ var L=ld("vr_chat",[]);L.push({ref:cu.ref,n:cu.name,rg:cu.region.replace(" Region",""),x:x,t:Date.now()});
+ sv("vr_chat",L.slice(-100));$("#zin").value="";rc(true);
+}
+$("#zsend").onclick=sendMsg;
+$("#zin").onkeydown=function(e){if(e.key==="Enter")sendMsg()};
+
+/* private feedback (citizen side) */
+function rf(end){
+ if(!cu)return;
+ var F=ld("vr_fb",[]).filter(function(m){return m.ref===cu.ref}),b=$("#zfl"),near=b.scrollHeight-b.scrollTop-b.clientHeight<40;
+ b.innerHTML=F.length?F.map(function(m){return '<div class="czm'+(m.from==="c"?" me":"")+'"><b>'+(m.from==="c"?"You":esc(m.by))+'</b> <span>'+when(m.t)+'</span><div>'+esc(m.x)+'</div></div>'}).join(""):'<span class="mu">No messages yet. Write your feedback below.</span>';
+ box(b,end,near);
+}
+function sendFb(){
+ var x=$("#zfi").value.trim();if(!x||!cu)return;
+ var F=ld("vr_fb",[]);F.push({ref:cu.ref,n:cu.name,from:"c",by:cu.name,x:x,t:Date.now()});
+ sv("vr_fb",F);$("#zfi").value="";rf(true);
+}
+$("#zfs").onclick=sendFb;
+$("#zfi").onkeydown=function(e){if(e.key==="Enter")sendFb()};
+
+/* private feedback (Founder and President side, inside Administration) */
+function fbAdmin(){
+ var ok=me&&LD.indexOf(me.c)>-1;fp.hidden=!ok;if(!ok)return;
+ var F=ld("vr_fb",[]),T={};
+ F.forEach(function(m){(T[m.ref]=T[m.ref]||[]).push(m)});
+ var ks=Object.keys(T).sort(function(a,b){return T[b][T[b].length-1].t-T[a][T[a].length-1].t});
+ $("#fbl").innerHTML=ks.length?ks.map(function(k){
+  var t=T[k],nm=t[0].n;
+  return '<details'+(k===openFb?" open":"")+'><summary>'+esc(nm)+' · '+k+' <span class="badge">'+t.length+' messages</span></summary><div class="kv">'+t.map(function(m){return '<b>'+(m.from==="c"?esc(m.n):esc(m.by))+'</b> · '+when(m.t)+'<br>'+esc(m.x)+'<br>'}).join("")+'</div><div class="acts"><input class="czi" data-r="'+k+'" placeholder="Reply to '+esc(nm)+'" maxlength="500"><button class="btn p" data-r="'+k+'">Reply</button></div></details>'}).join(""):'<div class="glass mu">No feedback yet.</div>';
+}
+$("#au").addEventListener("click",fbAdmin);
+$("#ao").addEventListener("click",function(){fp.hidden=true});
+$("#fbr").onclick=fbAdmin;
+$("#fbl").onclick=function(e){
+ var b=e.target.closest("button[data-r]");if(!b||!me||LD.indexOf(me.c)<0)return;
+ var k=b.dataset.r,i=document.querySelector('#fbl input[data-r="'+k+'"]'),x=i.value.trim();if(!x)return;
+ var F=ld("vr_fb",[]),n=(F.filter(function(m){return m.ref===k})[0]||{}).n||"";
+ F.push({ref:k,n:n,from:"s",by:me.r,x:x,t:Date.now()});sv("vr_fb",F);openFb=k;fbAdmin();
+};
+
+/* games */
+$("#zg").onclick=function(e){if(e.target.dataset.g)sg(e.target.dataset.g)};
+function sg(n){
+ clearInterval(gt);var g=$("#zgame");
+ document.querySelectorAll("#zg button").forEach(function(b){b.classList.toggle("on",b.dataset.g===n)});
+ if(n==="pair")pair(g);else if(n==="num")num(g);else tap(g);
+}
+function pair(g){
+ var E=["⭐","👑","⚖️","🏔️","🌊","📚"],D=E.concat(E).sort(function(){return Math.random()-.5}),op=[],found=0,mv=0,lk=false;
+ var best=ld("vr_best",{})[cu.ref];
+ g.innerHTML='<p class="lead" id="zpi">Flip two cards to find a matching pair.'+(best?" Your best: "+best+" moves.":"")+'</p><div class="czgrid" id="zpg">'+D.map(function(e,i){return '<button class="czc" data-i="'+i+'" aria-label="Hidden card">?</button>'}).join("")+'</div><button class="btn" id="zpr" style="margin-top:12px">New game</button>';
+ $("#zpr").onclick=function(){pair(g)};
+ $("#zpg").onclick=function(e){
+  var b=e.target.closest(".czc");if(!b||lk||b.classList.contains("up"))return;
+  b.textContent=D[b.dataset.i];b.classList.add("up");op.push(b);
+  if(op.length<2)return;
+  mv++;$("#zpi").textContent="Moves: "+mv;
+  if(op[0].textContent===op[1].textContent){
+   op.forEach(function(x){x.classList.add("ok")});op=[];
+   if(++found===6){var bs=ld("vr_best",{});if(!bs[cu.ref]||mv<bs[cu.ref]){bs[cu.ref]=mv;sv("vr_best",bs)}$("#zpi").textContent="You found every pair in "+mv+" moves. Your best: "+bs[cu.ref]+"."}
+  }else{lk=true;setTimeout(function(){op.forEach(function(x){x.textContent="?";x.classList.remove("up")});op=[];lk=false},800)}
+ };
+}
+function num(g){
+ var t=Math.floor(Math.random()*50)+1,left=7,done=false;
+ g.innerHTML='<p class="lead">I am thinking of a number from 1 to 50. You have 7 guesses.</p><div style="display:flex;gap:8px"><input id="zng" type="number" min="1" max="50" class="czi" placeholder="Your guess"><button class="btn p" id="znb">Guess</button></div><p class="mu" id="znm" style="margin-top:12px"></p>';
+ $("#znb").onclick=function(){
+  if(done){num(g);return}
+  var v=parseInt($("#zng").value,10),m=$("#znm");
+  if(!(v>=1&&v<=50)){m.textContent="Enter a number from 1 to 50.";return}
+  left--;
+  if(v===t){m.textContent="Correct! The number was "+t+".";done=true}
+  else if(left===0){m.textContent="Out of guesses. The number was "+t+".";done=true}
+  else m.textContent=(v<t?"Higher":"Lower")+". "+left+" guesses left.";
+  if(done)this.textContent="Play again";
+  $("#zng").value="";
+ };
+}
+function tap(g){
+ var sc=0,tl=15;
+ g.innerHTML='<p class="lead" id="ztp">Tap the gold star as many times as you can in 15 seconds.</p><div class="czar" id="zta"><button class="czs" id="zts" aria-label="Star">★</button></div><button class="btn p" id="ztg" style="margin-top:12px">Start</button>';
+ var s=$("#zts"),a=$("#zta");s.style.display="none";
+ function mv(){s.style.left=Math.random()*(a.clientWidth-44)+"px";s.style.top=Math.random()*(a.clientHeight-44)+"px"}
+ function sh(){$("#ztp").textContent="Score: "+sc+" · Time: "+tl+"s"}
+ $("#ztg").onclick=function(){
+  sc=0;tl=15;s.style.display="block";mv();sh();this.disabled=true;
+  gt=setInterval(function(){
+   tl--;sh();
+   if(tl<=0){clearInterval(gt);s.style.display="none";$("#ztp").textContent="Time is up. You tapped "+sc+" stars.";$("#ztg").disabled=false;$("#ztg").textContent="Play again"}
+  },1000);
+ };
+ s.onclick=function(){sc++;mv();sh()};
+}
+
+/* quiz */
+var QZ=[
+["What was Varelia called before 1887?",["Sevenistan","Valeris","Vareon","Caelora"],0],
+["What is the capital of Varelia?",["Solvara","Valeris","Valen","Dravena"],1],
+["What is the currency of Varelia?",["Varelian Crown (VCR)","Varelian Star","Federal Mark","Seven Coin"],0],
+["In what year was the Federal Republic formally established?",["1847","1887","1890","1900"],2],
+["Which Beginning stands for Justice?",["Dravena","Eryndor","Aurelia","Solvara"],3],
+["Which Beginning stands for Knowledge?",["Eryndor","Caelora","Valen","Vareon"],0],
+["How many federal regions does Varelia have?",["Five","Seven","Nine","Twelve"],1],
+["Who is the founder of Varelia?",["Neil Araña","Ghiriel Ballon","Jericho Legaspino","Castiel Saure"],2],
+["Which chamber of Congress represents the federal regions?",["National Assembly","Council of States","Constitutional Court","Federal Cabinet"],1],
+["What does the gold seven-pointed star on the flag represent?",["The seven regions","The seven courts","The Seven Beginnings","The seven founders"],2],
+["Which region is the center for science, research, and technology?",["Eryndor Region","Dravena Region","Caelora Region","Valen Region"],0]
+];
+function quiz(g){
+ var Q=QZ.slice().sort(function(){return Math.random()-.5}).slice(0,8),i=0,sc=0,lockq=false;
+ function show(){
+  var q=Q[i],o=q[1].map(function(t,k){return[t,k]}).sort(function(){return Math.random()-.5});lockq=false;
+  g.innerHTML='<p class="lead">Question '+(i+1)+' of 8 · Score '+sc+'</p><h3 style="margin:0 0 14px">'+q[0]+'</h3>'+o.map(function(x){return '<button class="btn czo" data-a="ans" data-k="'+x[1]+'">'+x[0]+'</button>'}).join("")+'<p id="zqm" style="margin:8px 0;font:14px system-ui"></p>';
+ }
+ function fin(){
+  var qb=ld("vr_quiz",{});if(!qb[cu.ref]||sc>qb[cu.ref]){qb[cu.ref]=sc;sv("vr_quiz",qb)}
+  var msg=sc===8?"Perfect. You know Varelia inside out.":sc>=6?"Well done. You know Varelia well.":"Keep learning. Read the History and Government pages and try again.";
+  g.innerHTML='<h3 style="margin:0 0 8px">You scored '+sc+' out of 8</h3><p class="mu">'+msg+'</p><p class="mu" style="margin-top:6px">Your best: '+qb[cu.ref]+' out of 8.</p><button class="btn p" data-a="again" style="margin-top:14px">Play again</button>';
+ }
+ g.onclick=function(e){
+  var b=e.target.closest("button[data-a]");if(!b)return;
+  var a=b.dataset.a;
+  if(a==="again"){quiz(g);return}
+  if(a==="next"){i++;if(i<8)show();else fin();return}
+  if(lockq)return;lockq=true;
+  var ok=+b.dataset.k===Q[i][2];if(ok)sc++;
+  g.querySelectorAll(".czo").forEach(function(x){x.disabled=true;if(+x.dataset.k===Q[i][2])x.classList.add("qg")});
+  if(!ok)b.classList.add("qb");
+  $("#zqm").innerHTML=(ok?"Correct.":"Not quite.")+' <button class="btn p" data-a="next" style="margin-left:8px">'+(i<7?"Next question":"See result")+'</button>';
+ };
+ show();
+}
+})();
+</script>
+</body>
+</html>
